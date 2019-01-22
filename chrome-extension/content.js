@@ -6,6 +6,28 @@ const dayCount = (date) => {
     return Math.round(Math.abs((theDay.getTime() - today.getTime())/(oneDay)));
 }
 
+// source: https://gist.github.com/mlocati/7210513
+const getScaleColor = (value) => {
+    let r, g, b = 0;
+    if (value < 50) {
+        r = 248;
+        g = Math.round(5.1 * value);
+    } else {
+        g = 190;
+        r = Math.round(510 - 5.10 * value);
+    }
+
+    return 'rgba(' + r + ',' + g + ',' + b + ',0.7)';
+}
+
+const getMaxFromObjects = (data) => {
+    // on vire la ligne de titre >_>
+    let extract = data.filter(data => data.average !== undefined)
+    extract = extract.map(data => data.average);
+
+    return Math.max.apply(null, extract);
+}
+
 const prepareDataForTable = (data) => {
     // keep only seeding downloads
     data = data.filter((dl) => dl.status === 'seeding')
@@ -29,6 +51,8 @@ const prepareDataForTable = (data) => {
 
 const buildTable = (tableData) => {
     let table = document.createElement('table');
+    const max = getMaxFromObjects(tableData);
+
     table.classList.add('seed-performance__table');
 
     tableData.forEach(function(rowData, rowIndex) {
@@ -46,6 +70,12 @@ const buildTable = (tableData) => {
 
             if (key === 'name') {
                 cell.setAttribute('title', cellData);
+            }
+
+            if (key === 'average') {
+                const percent = Math.round(cellData * 100 / max);
+                cell.style.color = "rgba(0,0,0,0.7)";
+                cell.style.backgroundColor = getScaleColor(percent);
             }
 
             // cell.classList.add('x-grid-cell')
