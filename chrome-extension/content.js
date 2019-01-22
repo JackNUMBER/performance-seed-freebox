@@ -14,14 +14,14 @@ const prepareDataForTable = (data) => {
 
     data.forEach(elm => {
         const days = dayCount(elm.created_ts);
-        array.push([
-            elm.queue_pos, // id
-            elm.name, // name
-            days + ' j', // duration
-            Math.round(elm.tx_bytes / elm.rx_bytes * 100) / 100, // ratio
-            Math.round(elm.tx_bytes / days / 10000) / 100,// Mo / jours
-            elm.io_priority // priority
-        ]);
+        array.push({
+            id: elm.queue_pos,
+            name: elm.name,
+            duration: days + ' j',
+            ratio: Math.round(elm.tx_bytes / elm.rx_bytes * 100) / 100,
+            average: Math.round(elm.tx_bytes / days / 10000) / 100,
+            priority: elm.io_priority
+        });
     });
 
     return array;
@@ -33,18 +33,18 @@ const buildTable = (tableData) => {
 
     tableData.forEach(function(rowData, rowIndex) {
         let row = document.createElement('tr');
-        // row.classList.add('seed-performance__table__row')
 
-        rowData.forEach(function(cellData, cellIndex) {
+        Object.keys(rowData).forEach(function (key) {
+            const cellData = rowData[key];
             let cell;
+
             if (rowIndex === 0) {
                 cell = document.createElement('th');
             } else {
                 cell = document.createElement('td');
             }
 
-            if (cellData.length > 12) {
-                // probably the name ^^'
+            if (key === 'name') {
                 cell.setAttribute('title', cellData);
             }
 
@@ -61,7 +61,6 @@ const buildTable = (tableData) => {
 
 const addTable = (data) => {
     data = prepareDataForTable(data);
-    // console.log(data);return;
 
     let wrapper = document.createElement('div');
     let tableContainer = document.createElement('div');
@@ -99,7 +98,7 @@ const getData = (callback) => {
             if (xhr.status === OK) {
                 callback(JSON.parse(xhr.responseText).result);
             } else {
-                console.log('Error with API: ' + xhr.status);
+                console.error('Error with API: ' + xhr.status);
             }
         }
     };
