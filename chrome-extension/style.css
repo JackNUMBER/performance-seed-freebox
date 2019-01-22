@@ -1,0 +1,50 @@
+.seed-performance {
+    padding: 10px;
+    position: absolute;
+    bottom: 50px;
+    right: 20px;
+    background-color: rgba(0,0,0,0.3);
+    color: rgba(255,255,255,0.7);
+    z-index: 99999;
+    max-height: calc(100vh - 50px);
+    overflow: auto;
+    cursor: default;
+}
+
+.seed-performance {
+    background-color: rgba(0,0,0,0.8);
+}
+
+.seed-performance__toggle {
+    cursor: pointer;
+}
+
+.seed-performance__table {
+    border-collapse: collapse;
+}
+
+.seed-performance__table tr:not(:first-child):hover {
+    color: white;
+    background-color: rgba(255,255,255,0.3);
+}
+
+.seed-performance__table th {
+    font-size: 10px;
+    font-weight: normal;
+    text-transform: uppercase;
+    text-align: left;
+}
+
+.seed-performance__table th,
+.seed-performance__table td {
+    padding: 5px;
+    max-width: 300px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.seed-performance__table tr + tr td {
+    border-top: 1px solid rgba(255,255,255,0.2);
+}
+

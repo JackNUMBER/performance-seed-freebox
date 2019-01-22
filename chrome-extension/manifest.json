@@ -1,0 +1,28 @@
+{
+  "name": "Performance Seed Freebox",
+  "version": "0.1.0",
+  "manifest_version": 2,
+  "description": "Affiche l'efficacité des seeds sur l'interface FreeboxOS",
+  "homepage_url": "http://mafreebox.free.fr",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "permissions": [
+    "*://mafreebox.free.fr/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://mafreebox.free.fr/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "css" : ["style.css"]
+    }
+  ]
+}
+
+
