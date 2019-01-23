@@ -1,3 +1,6 @@
+
+let isTableOpen = false;
+
 const dayCount = (date) => {
     const oneDay = 24 * 60 * 60 * 1000;
     const theDay = new Date(date * 1000);
@@ -137,25 +140,29 @@ const getData = (callback, targetNode) => {
 const setToggle = (targetNode) => {
     let toggle = document.createElement('span');
     toggle.id = 'seedPerformanceToggle';
-    toggle.isActive = false;
     toggle.textContent = 'Performance seed';
     toggle.classList.add('seed-performance__toggle');
     toggle.addEventListener('click', () => {
-        if (!toggle.isActive) {
-            toggle.isActive = true;
+        if (!isTableOpen) {
             targetNode.classList.add('active');
         } else {
-            toggle.isActive = false;
             targetNode.classList.remove('active');
         }
+        isTableOpen = !isTableOpen;
     });
+
+    if (isTableOpen) {
+        targetNode.classList.add('active');
+    }
 
     targetNode.appendChild(toggle);
 }
 
 const setUpdate = (targetNode) => {
     setTimeout(() => {
-        getData(addTable, targetNode);
+        if (isTableOpen) {
+            getData(addTable, targetNode);
+        }
         setUpdate(targetNode); // and again, and again...
     }, 60000);
 }
