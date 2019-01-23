@@ -92,23 +92,13 @@ const buildTable = (tableData) => {
 const addTable = (data) => {
     data = prepareDataForTable(data);
 
-    let wrapper = document.createElement('div');
     let tableContainer = document.createElement('div');
-    let toggle = document.createElement('div');
 
     tableContainer.appendChild(buildTable(data));
+    tableContainer.id = 'seedPerformanceTable';
+    tableContainer.classList.add('seed-performance__table-container');
 
-    toggle.id = 'seedPerformanceToggle';
-    toggle.textContent = 'Performance seed';
-    toggle.classList.add('seed-performance__toggle');
-
-    wrapper.classList.add('seed-performance');
-    wrapper
-        .appendChild(tableContainer)
-        // .appendChild(toggle)
-    ;
-
-    document.body.appendChild(wrapper);
+    document.querySelector('#seedPerformance').appendChild(tableContainer);
 };
 
 const getData = (callback) => {
@@ -134,8 +124,34 @@ const getData = (callback) => {
     };
 };
 
+const setToggle = () => {
+    let container = document.querySelector('#seedPerformance');
+    let toggle = document.createElement('span');
+    toggle.id = 'seedPerformanceToggle';
+    toggle.isActive = false;
+    toggle.textContent = 'Performance seed';
+    toggle.classList.add('seed-performance__toggle');
+    toggle.addEventListener('click', () => {
+        if (!toggle.isActive) {
+            toggle.isActive = true;
+            container.classList.add('active');
+        } else {
+            toggle.isActive = false;
+            container.classList.remove('active');
+        }
+    });
+
+    container.appendChild(toggle);
+}
+
 const init = () => {
+    let wrapper = document.createElement('div');
+    wrapper.id = 'seedPerformance';
+    wrapper.classList.add('seed-performance');
+    document.body.appendChild(wrapper);
+
     getData(addTable);
+    setToggle();
 };
 
 init();

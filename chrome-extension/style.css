@@ -1,25 +1,41 @@
 .seed-performance {
-    padding: 5px 10px;
     position: absolute;
     bottom: 50px;
     right: 20px;
-    background-color: rgba(0,0,0,0.3);
-    color: rgba(255,255,255,0.7);
-    z-index: 99999;
-    max-height: calc(100vh - 50px);
-    overflow: auto;
-    cursor: default;
 }
 
-.seed-performance {
+.seed-performance.active .seed-performance__toggle,
+.seed-performance__toggle:hover,
+.seed-performance__table-container {
+    color: rgba(255,255,255,0.7);
     background-color: rgba(0,0,0,0.8);
 }
 
 .seed-performance__toggle {
+    position: absolute;
+    right: 0;
+    top: -20px;
+    padding: 3px 5px;
+    color: rgba(255,255,255,0.3);
+    background-color: rgba(0,0,0,0.2);
     cursor: pointer;
 }
 
+.seed-performance__table-container {
+    z-index: 99999;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 1s;
+    cursor: default;
+}
+
+.seed-performance.active .seed-performance__table-container {
+    max-height: calc(100vh - 50px);
+    overflow: auto;
+}
+
 .seed-performance__table {
+    margin: 5px 10px;
     border-collapse: collapse;
 }
 
