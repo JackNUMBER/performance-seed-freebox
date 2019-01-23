@@ -22,6 +22,16 @@
     cursor: pointer;
 }
 
+.seed-performance__toast {
+    position: absolute;
+    color: rgba(255,255,255,0.7);
+    opacity: 0;
+}
+
+.seed-performance__toast.toasted {
+    animation: 1s toasted forwards, 0.2s 1.5s hideToast forwards;
+}
+
 .seed-performance__table-container {
     max-height: 0;
     overflow: hidden;
@@ -64,3 +74,28 @@
     border-top: 1px solid rgba(255,255,255,0.2);
 }
 
+@keyframes toasted {
+    0% {
+        opacity: 0;
+        top: 0;
+    }
+    25% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 1;
+        top: -50px;
+    }
+}
+
+@keyframes hideToast {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}

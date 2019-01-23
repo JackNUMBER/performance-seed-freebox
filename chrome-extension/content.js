@@ -158,10 +158,32 @@ const setToggle = (targetNode) => {
     targetNode.appendChild(toggle);
 }
 
+const setToast = (targetNode) => {
+    let toast = document.createElement('span');
+    toast.id = 'seedPerformanceToast';
+    toast.textContent = 'Mis à jour !';
+    toast.classList.add('seed-performance__toast');
+
+    targetNode.appendChild(toast);
+}
+
+
+const displayToast = () => {
+    let toast = document.querySelector('#seedPerformanceToast');
+    // reset animation
+    toast.classList.remove('toasted');
+    void toast.offsetWidth;
+
+    toast.classList.add('toasted');
+}
+
 const setUpdate = (targetNode) => {
+    setToast(targetNode);
+
     setTimeout(() => {
         if (isTableOpen) {
             getData(addTable, targetNode);
+            displayToast();
         }
         setUpdate(targetNode); // and again, and again...
     }, 60000);
