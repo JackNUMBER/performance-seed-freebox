@@ -91,13 +91,23 @@ const buildTable = (tableData) => {
 
 const addTable = (data, targetNode) => {
     data = prepareDataForTable(data);
+    let tableContainer;
+    const tableContainerId = 'tableContainer';
 
-    let tableContainer = document.createElement('div');
+    if (document.contains(document.querySelector('#' + tableContainerId))) {
+        // update
+        tableContainer = document.querySelector('#' + tableContainerId);
+        while (tableContainer.firstChild) {
+            tableContainer.removeChild(tableContainer.firstChild); // empty all tree
+        }
+    } else {
+        // first time
+        tableContainer = document.createElement('div');
+        tableContainer.id = tableContainerId;
+        tableContainer.classList.add('seed-performance__table-container');
+    }
 
     tableContainer.appendChild(buildTable(data));
-    tableContainer.id = 'seedPerformanceTable';
-    tableContainer.classList.add('seed-performance__table-container');
-
     targetNode.appendChild(tableContainer);
 };
 
@@ -143,6 +153,13 @@ const setToggle = (targetNode) => {
     targetNode.appendChild(toggle);
 }
 
+const setUpdate = (targetNode) => {
+    setTimeout(() => {
+        getData(addTable, targetNode);
+        setUpdate(wrapper); // and again, and again...
+    }, 60000);
+}
+
 const init = () => {
     let wrapper = document.createElement('div');
     wrapper.id = 'seedPerformance';
@@ -151,6 +168,7 @@ const init = () => {
 
     getData(addTable, wrapper);
     setToggle(wrapper);
+    setUpdate(wrapper);
 };
 
 init();
