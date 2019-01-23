@@ -89,7 +89,7 @@ const buildTable = (tableData) => {
     return table;
 };
 
-const addTable = (data) => {
+const addTable = (data, targetNode) => {
     data = prepareDataForTable(data);
 
     let tableContainer = document.createElement('div');
@@ -98,10 +98,10 @@ const addTable = (data) => {
     tableContainer.id = 'seedPerformanceTable';
     tableContainer.classList.add('seed-performance__table-container');
 
-    document.querySelector('#seedPerformance').appendChild(tableContainer);
+    targetNode.appendChild(tableContainer);
 };
 
-const getData = (callback) => {
+const getData = (callback, targetNode) => {
     // TODO: get it from original page, use web_accessible_resources and messages
     // https://stackoverflow.com/a/20023723/983161
     const apiBaseUrl = '/api/v6/';
@@ -116,7 +116,7 @@ const getData = (callback) => {
         const OK = 200; // status 200 is a successful return.
         if (xhr.readyState === DONE) {
             if (xhr.status === OK) {
-                callback(JSON.parse(xhr.responseText).result);
+                callback(JSON.parse(xhr.responseText).result, targetNode);
             } else {
                 console.error('Error with API: ' + xhr.status);
             }
@@ -124,8 +124,7 @@ const getData = (callback) => {
     };
 };
 
-const setToggle = () => {
-    let container = document.querySelector('#seedPerformance');
+const setToggle = (targetNode) => {
     let toggle = document.createElement('span');
     toggle.id = 'seedPerformanceToggle';
     toggle.isActive = false;
@@ -134,14 +133,14 @@ const setToggle = () => {
     toggle.addEventListener('click', () => {
         if (!toggle.isActive) {
             toggle.isActive = true;
-            container.classList.add('active');
+            targetNode.classList.add('active');
         } else {
             toggle.isActive = false;
-            container.classList.remove('active');
+            targetNode.classList.remove('active');
         }
     });
 
-    container.appendChild(toggle);
+    targetNode.appendChild(toggle);
 }
 
 const init = () => {
@@ -150,8 +149,8 @@ const init = () => {
     wrapper.classList.add('seed-performance');
     document.body.appendChild(wrapper);
 
-    getData(addTable);
-    setToggle();
+    getData(addTable, wrapper);
+    setToggle(wrapper);
 };
 
 init();
