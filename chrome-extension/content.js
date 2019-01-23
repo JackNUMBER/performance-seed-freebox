@@ -161,6 +161,10 @@ const setUpdate = (targetNode) => {
 }
 
 const init = () => {
+    if (document.contains(document.querySelector('#login-form'))) {
+        return; // meh
+    }
+
     let wrapper = document.createElement('div');
     wrapper.id = 'seedPerformance';
     wrapper.classList.add('seed-performance');
