@@ -55,10 +55,10 @@ const buildTable = (tableData) => {
 
     table.classList.add('seed-performance__table');
 
-    tableData.forEach(function(rowData, rowIndex) {
+    tableData.forEach((rowData, rowIndex) => {
         let row = document.createElement('tr');
 
-        Object.keys(rowData).forEach(function (key) {
+        Object.keys(rowData).forEach(key => {
             const cellData = rowData[key];
             let cell;
 
@@ -111,7 +111,7 @@ const getData = (callback) => {
     xhr.open('GET', apiBaseUrl + apiDownloadUrl);
     xhr.send(null);
 
-    xhr.onreadystatechange = function () {
+    xhr.onreadystatechange = () => {
         const DONE = 4; // readyState 4 means the request is done.
         const OK = 200; // status 200 is a successful return.
         if (xhr.readyState === DONE) {
