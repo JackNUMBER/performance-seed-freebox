@@ -156,7 +156,7 @@ const setToggle = (targetNode) => {
 const setUpdate = (targetNode) => {
     setTimeout(() => {
         getData(addTable, targetNode);
-        setUpdate(wrapper); // and again, and again...
+        setUpdate(targetNode); // and again, and again...
     }, 60000);
 }
 
