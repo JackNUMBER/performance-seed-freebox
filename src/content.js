@@ -117,11 +117,12 @@ const addTable = (data, targetNode) => {
 const getData = (callback, targetNode) => {
     // TODO: get it from original page, use web_accessible_resources and messages
     // https://stackoverflow.com/a/20023723/983161
-    const apiBaseUrl = '/api/v6/';
+    const host = window.location;
+    const apiBaseUrl = 'api/v6/';
     const apiDownloadUrl = 'downloads/';
 
     let xhr = new XMLHttpRequest();
-    xhr.open('GET', apiBaseUrl + apiDownloadUrl);
+    xhr.open('GET', host + apiBaseUrl + apiDownloadUrl);
     xhr.send(null);
 
     xhr.onreadystatechange = () => {
