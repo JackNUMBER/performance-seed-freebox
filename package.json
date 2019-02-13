@@ -2,10 +2,13 @@
   "dependencies": {
     "chrome-webstore-upload-cli": "^1.2.0",
     "crx": "^3.2.1",
-    "node-zip": "^1.1.1"
+    "node-zip": "^1.1.1",
+    "web-ext": "^3.0.0"
   },
   "scripts": {
-    "build-chrome": "node ./node_modules/crx/bin/crx.js pack chrome-extension -o releases/chrome/seed-freebox.crx -p chrome-private-key.pem",
-    "upload-chrome": "node ./node_modules/chrome-webstore-upload-cli/index.js upload --source chrome-extension --extension-id edlkgcidmeflfpjmeakkhhehbocokaie --client-id xxxx --client-secret yyyy --refresh-token zzz"
+    "build-chrome": "node ./node_modules/crx/bin/crx.js pack src -o releases/chrome/performance_seed_freebox.crx -p chrome-private-key.pem",
+    "upload-chrome": "node ./node_modules/chrome-webstore-upload-cli/index.js upload --source src --extension-id edlkgcidmeflfpjmeakkhhehbocokaie --client-id xxxx --client-secret yyyy --refresh-token zzz",
+    "build-firefox": "node ./node_modules/web-ext/bin/web-ext build --source-dir src --artifacts-dir releases/firefox/",
+    "sign-firefox": "node ./node_modules/web-ext/bin/web-ext sign --source-dir src --artifacts-dir releases/firefox/ --api-key aaaa --api-secret bbbb --id {performance-seed-freebox}"
   }
 }
