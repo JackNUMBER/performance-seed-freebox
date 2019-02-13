@@ -1,0 +1,4 @@
+*.pem
+releases/
+ressources/
+node_modules/
