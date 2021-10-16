@@ -3,7 +3,6 @@
   "version": "1.2.1",
   "manifest_version": 2,
   "description": "Affiche l'efficacité des seeds sur l'interface FreeboxOS",
-  "homepage_url": "http://mafreebox.free.fr",
   "icons": {
     "16": "icons/icon16.png",
     "48": "icons/icon48.png",
@@ -11,12 +10,14 @@
   },
   "author": "Jack NUMBER",
   "permissions": [
-    "*://mafreebox.free.fr/*"
+    "http://*/*",
+    "https://*/*"
   ],
   "content_scripts": [
     {
       "matches": [
-        "*://mafreebox.free.fr/*"
+        "http://*/*",
+        "https://*/*"
       ],
       "js": [
         "content.js"
