@@ -5,26 +5,29 @@
     z-index: 99999;
 }
 
-.seed-performance.active .seed-performance__toggle,
-.seed-performance__toggle:hover,
+.seed-performance__toggle,
 .seed-performance__table-container {
-    color: rgba(255,255,255,0.7);
-    background-color: rgba(0,0,0,0.8);
+    color: #fff;
+    background: #9453ff;
 }
 
 .seed-performance__toggle {
     position: absolute;
     right: 0;
-    top: -20px;
-    padding: 3px 5px;
-    color: rgba(255,255,255,0.3);
-    background-color: rgba(0,0,0,0.2);
+    top: -30px;
+    padding: 8px 12px;
+    font-weight: bold;
     cursor: pointer;
+    border-radius: 8px 8px 0 0;
+}
+
+.seed-performance__toggle:hover {
+    background: #824dd9;
 }
 
 .seed-performance__toast {
     position: absolute;
-    color: rgba(255,255,255,0.7);
+    color: rgba(0,0,0,0.7);
     opacity: 0;
 }
 
@@ -35,23 +38,29 @@
 .seed-performance__table-container {
     max-height: 0;
     overflow: hidden;
-    transition: max-height 1s;
+    border-radius: 8px 0 0 0;
+    box-shadow: 0 1px 1px rgba(0,0,0,.11),0 2px 2px rgba(0,0,0,.11),0 4px 4px rgba(0,0,0,.11),0 8px 8px rgba(0,0,0,.11),0 16px 16px rgba(0,0,0,.11),0 32px 32px rgba(0,0,0,.11);
+    transition: all 1s;
     cursor: default;
+
 }
 
 .seed-performance.active .seed-performance__table-container {
-    max-height: calc(100vh - 50px);
+    max-height: calc(100vh - 50px - 30px - 10px); /* viewport - taskbar - toggle - gap */
     overflow: auto;
 }
 
 .seed-performance__table {
-    margin: 5px 10px;
+    margin: 30px 0 12px;
     border-collapse: collapse;
+    color: #000;
+    background-color: #fff;
+    border-left: 1px solid #ededed;
+    border-right: 1px solid #ededed;
 }
 
 .seed-performance__table tr:not(:first-child):hover {
-    color: white;
-    background-color: rgba(255,255,255,0.3);
+    background-color: #eeeeee;
 }
 
 .seed-performance__table th {
@@ -59,6 +68,7 @@
     font-weight: normal;
     text-transform: uppercase;
     text-align: left;
+    background-color: #fafafa;
 }
 
 .seed-performance__table th,
@@ -71,7 +81,7 @@
 }
 
 .seed-performance__table tr + tr td {
-    border-top: 1px solid rgba(255,255,255,0.2);
+    border-top: 1px solid #ededed;
 }
 
 @keyframes toasted {
@@ -87,7 +97,7 @@
     }
     100% {
         opacity: 1;
-        top: -50px;
+        top: -30px;
     }
 }
 
