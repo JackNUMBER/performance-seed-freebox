@@ -1,10 +1,7 @@
-# Performance Seed Freebox [![Chrome version][badge-cws]][link-cws] ![Firefox version][badge-ff]
-
-**Note :** le store Firefox refuse cette extension à cause d'une audience trop réduite.
+# Performance Seed Freebox [![Chrome version][badge-cws]][link-cws] [![Firefox version][badge-amo]][link-cws]
 
   [badge-cws]: https://img.shields.io/chrome-web-store/v/edlkgcidmeflfpjmeakkhhehbocokaie.svg?label=chrome
   [badge-amo]: https://img.shields.io/amo/v/performance-seed-freebox.svg?label=firefox
-  [badge-ff]: https://img.shields.io/badge/firefox-refusé-lightgray
   [link-cws]: https://chrome.google.com/webstore/detail/npmhub/edlkgcidmeflfpjmeakkhhehbocokaie "Aller sur la page Chrome Web Store"
   [link-amo]: https://addons.mozilla.org/fr/firefox/addon/performance-seed-freebox/ "Aller sur la page Firefox add-ons"
 
