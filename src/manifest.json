@@ -9,22 +9,12 @@
     "128": "icons/icon128.png"
   },
   "author": "Jack NUMBER",
-  "permissions": [
-    "http://*/*",
-    "https://*/*"
-  ],
+  "permissions": ["http://*/*", "https://*/*"],
   "content_scripts": [
     {
-      "matches": [
-        "http://*/*",
-        "https://*/*"
-      ],
-      "js": [
-        "content.js"
-      ],
-      "css": [
-        "style.css"
-      ]
+      "matches": ["http://*/*", "https://*/*"],
+      "js": ["content.js"],
+      "css": ["style.css"]
     }
   ]
 }
