@@ -161,7 +161,7 @@ const setToggle = (targetNode) => {
 const setToast = (targetNode) => {
   let toast = document.createElement('span');
   toast.id = 'seedPerformanceToast';
-  toast.textContent = 'Mis à jour';
+  toast.textContent = '✔ Mis à jour';
   toast.classList.add('seed-performance__toast');
 
   targetNode.appendChild(toast);
@@ -177,8 +177,6 @@ const displayToast = () => {
 };
 
 const setUpdate = (targetNode) => {
-  setToast(targetNode);
-
   setTimeout(() => {
     if (isTableOpen) {
       getData(addTable, targetNode);
@@ -196,6 +194,7 @@ const init = () => {
 
   getData(addTable, wrapper);
   setToggle(wrapper);
+  setToast(wrapper);
   setUpdate(wrapper);
 };
 

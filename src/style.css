@@ -28,12 +28,14 @@
 
 .seed-performance__toast {
   position: absolute;
-  color: rgba(0, 0, 0, 0.7);
+  top: 7px;
+  left: 6px;
+  color: white;
   opacity: 0;
 }
 
 .seed-performance__toast.toasted {
-  animation: 1s toasted forwards, 0.2s 1.5s hideToast forwards;
+  animation: 1s toasted forwards, 1s 6s hideToast forwards;
 }
 
 .seed-performance__table-container {
@@ -78,7 +80,7 @@
 .seed-performance__table th,
 .seed-performance__table td {
   padding: 5px;
-  max-width: 300px;
+  max-width: 400px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -91,17 +93,9 @@
 @keyframes toasted {
   0% {
     opacity: 0;
-    top: 0;
-  }
-  25% {
-    opacity: 0;
-  }
-  50% {
-    opacity: 1;
   }
   100% {
     opacity: 1;
-    top: -30px;
   }
 }
 
