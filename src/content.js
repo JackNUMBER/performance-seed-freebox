@@ -40,12 +40,14 @@ const prepareDataForTable = (data) => {
 
   data.forEach((elm) => {
     const days = dayCount(elm.created_ts);
+    const daysCompute = days > 0 ? days : 1;
+    console.log(elm.tx_bytes / days / 10000);
     array.push({
       id: elm.queue_pos,
       name: elm.name,
       duration: days + ' j',
       ratio: Math.round((elm.tx_bytes / elm.rx_bytes) * 100) / 100,
-      average: Math.round(elm.tx_bytes / days / 10000) / 100,
+      average: Math.round(elm.tx_bytes / daysCompute / 10000) / 100,
       priority: elm.io_priority,
     });
   });
