@@ -1,6 +1,6 @@
 {
   "name": "Performance Seed Freebox",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "manifest_version": 2,
   "description": "Affiche l'efficacité des seeds sur l'interface FreeboxOS",
   "icons": {
