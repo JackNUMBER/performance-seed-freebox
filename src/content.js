@@ -24,30 +24,36 @@ const getScaleColor = (value) => {
   return 'rgba(' + r + ',' + g + ',' + b + ',0.7)';
 };
 
-const getMaxFromObjects = (data) => {
+const getMaxFromObjects = (data, key) => {
   // on vire la ligne de titre >_>
-  let extract = data.filter((data) => data.average !== undefined);
-  extract = extract.map((data) => data.average);
+  let extract = data.filter((data) => data[key] !== undefined);
+  extract = extract.map((data) => data[key]);
 
   return Math.max.apply(null, extract);
+};
+
+const round = (number, decimals) => {
+  const factor = Number(`1${'0'.repeat(decimals)}`);
+  return Math.round(number * factor) / factor;
 };
 
 const prepareDataForTable = (data) => {
   // keep only seeding downloads
   data = data.filter((dl) => dl.status === 'seeding');
 
-  let array = [['#', 'nom', 'durée', 'ratio', 'Mo/j', 'priorité']];
+  let array = [['#', 'nom', 'durée', 'ratio', 'ratio/j', 'Mo/j', 'priorité']];
 
   data.forEach((elm) => {
     const days = dayCount(elm.created_ts);
     const daysCompute = days > 0 ? days : 1;
-    console.log(elm.tx_bytes / days / 10000);
+    const ratio = elm.tx_bytes / elm.rx_bytes;
     array.push({
       id: elm.queue_pos,
       name: elm.name,
-      duration: days + ' j',
-      ratio: Math.round((elm.tx_bytes / elm.rx_bytes) * 100) / 100,
-      average: Math.round(elm.tx_bytes / daysCompute / 10000) / 100,
+      duration: `${days} j`,
+      ratio: round(ratio, 2),
+      ratioByDay: round(ratio / days, 2),
+      bytesByDay: round(elm.tx_bytes / daysCompute / 1000000, 1),
       priority: elm.io_priority,
     });
   });
@@ -57,7 +63,6 @@ const prepareDataForTable = (data) => {
 
 const buildTable = (tableData) => {
   let table = document.createElement('table');
-  const max = getMaxFromObjects(tableData);
 
   table.classList.add('seed-performance__table');
 
@@ -78,8 +83,18 @@ const buildTable = (tableData) => {
         cell.setAttribute('title', cellData);
       }
 
-      if (key === 'average') {
-        const percent = Math.round((cellData * 100) / max);
+      if (key === 'bytesByDay') {
+        const percent = Math.round(
+          (cellData * 100) / getMaxFromObjects(tableData, 'bytesByDay'),
+        );
+        cell.style.color = 'rgba(0,0,0,0.7)';
+        cell.style.backgroundColor = getScaleColor(percent);
+      }
+
+      if (key === 'ratioByDay') {
+        const percent = Math.round(
+          (cellData * 100) / getMaxFromObjects(tableData, 'ratioByDay'),
+        );
         cell.style.color = 'rgba(0,0,0,0.7)';
         cell.style.backgroundColor = getScaleColor(percent);
       }
