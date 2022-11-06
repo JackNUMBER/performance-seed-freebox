@@ -25,11 +25,10 @@ const getScaleColor = (value) => {
 };
 
 const getMaxFromObjects = (data, key) => {
-  // on vire la ligne de titre >_>
-  let extract = data.filter((data) => data[key] !== undefined);
-  extract = extract.map((data) => data[key]);
-
-  return Math.max.apply(null, extract);
+  return Math.max.apply(
+    null,
+    data.map((data) => data[key]),
+  );
 };
 
 const round = (number, decimals) => {
@@ -41,7 +40,7 @@ const prepareDataForTable = (data) => {
   // keep only seeding downloads
   data = data.filter((dl) => dl.status === 'seeding');
 
-  let array = [['#', 'nom', 'durée', 'ratio', 'ratio/j', 'Mo/j', 'priorité']];
+  let array = [];
 
   data.forEach((elm) => {
     const days = dayCount(elm.created_ts);
@@ -61,9 +60,10 @@ const prepareDataForTable = (data) => {
   return array;
 };
 
-const buildCell = (cellKey, cellData, rowData, rowIndex, tableData) => {
+const buildCell = (cellKey, cellData, rowData, isHeading, tableData) => {
   let cell;
-  if (rowIndex === 0) {
+
+  if (isHeading) {
     cell = document.createElement('th');
   } else {
     cell = document.createElement('td');
@@ -93,13 +93,13 @@ const buildCell = (cellKey, cellData, rowData, rowIndex, tableData) => {
   return cell;
 };
 
-const buildRow = (rowData, rowIndex, tableData) => {
+const buildRow = (rowData, isHeading, tableData) => {
   let row = document.createElement('tr');
 
   // build cell
   Object.keys(rowData).forEach((cellKey) => {
     const cellData = rowData[cellKey];
-    const cell = buildCell(cellKey, cellData, rowData, rowIndex, tableData);
+    const cell = buildCell(cellKey, cellData, rowData, isHeading, tableData);
     row.appendChild(cell);
   });
 
@@ -111,9 +111,13 @@ const buildTable = (tableData) => {
 
   table.classList.add('seed-performance__table');
 
+  const heading = ['#', 'nom', 'durée', 'ratio', 'ratio/j', 'Mo/j', 'priorité'];
+  const thead = buildRow(heading, true, tableData);
+  table.appendChild(thead);
+
   // build row
   tableData.forEach((rowData, rowIndex) => {
-    const row = buildRow(rowData, rowIndex, tableData);
+    const row = buildRow(rowData, false, tableData);
     table.appendChild(row);
   });
 
