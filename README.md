@@ -15,11 +15,16 @@
   </a>
 </p>
 
-![](images/hero.jpg)
+![](images/hero.png)
 
 Cette extension affiche un tableau avec l'efficacité des torrents en cours de partage (seeds) sur votre Freebox. Cela vous aide à déterminer les seeds les plus rentables pour votre ratio ;)
 
-Le calcul utilise le temps de partage et le volume partagé du torrent pour déterminer une moyenne de partage par jour. L'échelle de couleur est relative au seed le plus performant. Seulement les torrent en seed actif sont affichés dans le tableau. Le tableau se met à jour toutes les minutes sauf si il est fermé.
+Les deux principales informations supplémentaires pour chaque torrent sont :
+
+- le volume de ratio par jour (moyenne)
+- le volume de données partagés par jour (moyenne)
+
+Une échelle de couleur permet de rapidement voir les torrents les plus performants. Seuls les torrent en seed actifs sont affichés dans le tableau. Le tableau se met à jour toutes les minutes quand il est ouvert.
 
 ![](images/update.gif) _Notification de mise à jour_
 
