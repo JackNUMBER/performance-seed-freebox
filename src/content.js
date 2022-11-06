@@ -61,49 +61,59 @@ const prepareDataForTable = (data) => {
   return array;
 };
 
+const buildCell = (cellKey, cellData, rowData, rowIndex, tableData) => {
+  let cell;
+  if (rowIndex === 0) {
+    cell = document.createElement('th');
+  } else {
+    cell = document.createElement('td');
+  }
+
+  if (cellKey === 'name') {
+    cell.setAttribute('title', cellData);
+  }
+
+  if (cellKey === 'bytesByDay') {
+    const percent = Math.round(
+      (cellData * 100) / getMaxFromObjects(tableData, 'bytesByDay'),
+    );
+    cell.style.color = 'rgba(0,0,0,0.7)';
+    cell.style.backgroundColor = getScaleColor(percent);
+  }
+
+  if (cellKey === 'ratioByDay') {
+    const percent = Math.round(
+      (cellData * 100) / getMaxFromObjects(tableData, 'ratioByDay'),
+    );
+    cell.style.color = 'rgba(0,0,0,0.7)';
+    cell.style.backgroundColor = getScaleColor(percent);
+  }
+
+  cell.appendChild(document.createTextNode(cellData));
+  return cell;
+};
+
+const buildRow = (rowData, rowIndex, tableData) => {
+  let row = document.createElement('tr');
+
+  // build cell
+  Object.keys(rowData).forEach((cellKey) => {
+    const cellData = rowData[cellKey];
+    const cell = buildCell(cellKey, cellData, rowData, rowIndex, tableData);
+    row.appendChild(cell);
+  });
+
+  return row;
+};
+
 const buildTable = (tableData) => {
   let table = document.createElement('table');
 
   table.classList.add('seed-performance__table');
 
+  // build row
   tableData.forEach((rowData, rowIndex) => {
-    let row = document.createElement('tr');
-
-    Object.keys(rowData).forEach((key) => {
-      const cellData = rowData[key];
-      let cell;
-
-      if (rowIndex === 0) {
-        cell = document.createElement('th');
-      } else {
-        cell = document.createElement('td');
-      }
-
-      if (key === 'name') {
-        cell.setAttribute('title', cellData);
-      }
-
-      if (key === 'bytesByDay') {
-        const percent = Math.round(
-          (cellData * 100) / getMaxFromObjects(tableData, 'bytesByDay'),
-        );
-        cell.style.color = 'rgba(0,0,0,0.7)';
-        cell.style.backgroundColor = getScaleColor(percent);
-      }
-
-      if (key === 'ratioByDay') {
-        const percent = Math.round(
-          (cellData * 100) / getMaxFromObjects(tableData, 'ratioByDay'),
-        );
-        cell.style.color = 'rgba(0,0,0,0.7)';
-        cell.style.backgroundColor = getScaleColor(percent);
-      }
-
-      // cell.classList.add('x-grid-cell')
-      cell.appendChild(document.createTextNode(cellData));
-      row.appendChild(cell);
-    });
-
+    const row = buildRow(rowData, rowIndex, tableData);
     table.appendChild(row);
   });
 
