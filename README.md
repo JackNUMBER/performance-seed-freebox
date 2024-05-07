@@ -24,9 +24,7 @@ Les deux principales informations supplémentaires pour chaque torrent sont :
 - le volume de ratio par jour (moyenne)
 - le volume de données partagés par jour (moyenne)
 
-Une échelle de couleur permet de rapidement voir les torrents les plus performants. Seuls les torrent en seed actifs sont affichés dans le tableau. Le tableau se met à jour toutes les minutes quand il est ouvert.
-
-![](images/update.gif) _Notification de mise à jour_
+Une échelle de couleur permet de rapidement voir les torrents les plus performants. Le tableau se met à jour toutes les 2 secondes quand il est ouvert.
 
 ### Vie privée
 
