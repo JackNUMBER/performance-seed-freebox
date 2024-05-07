@@ -1,3 +1,5 @@
+const AUTOREFRESH_DURATION_IN_SECONDS = 2;
+
 let isTableOpen = false;
 
 const dayCount = (date) => {
@@ -189,32 +191,13 @@ const setToggle = (targetNode) => {
   targetNode.appendChild(toggle);
 };
 
-const setToast = (targetNode) => {
-  let toast = document.createElement('span');
-  toast.id = 'seedPerformanceToast';
-  toast.textContent = '✔ Mis à jour';
-  toast.classList.add('seed-performance__toast');
-
-  targetNode.appendChild(toast);
-};
-
-const displayToast = () => {
-  let toast = document.querySelector('#seedPerformanceToast');
-  // reset animation
-  toast.classList.remove('toasted');
-  void toast.offsetWidth;
-
-  toast.classList.add('toasted');
-};
-
 const setUpdate = (targetNode) => {
   setTimeout(() => {
     if (isTableOpen) {
       getData(addTable, targetNode);
-      displayToast();
     }
     setUpdate(targetNode); // and again, and again...
-  }, 60000);
+  }, AUTOREFRESH_DURATION_IN_SECONDS * 1000);
 };
 
 const init = () => {
@@ -225,7 +208,6 @@ const init = () => {
 
   getData(addTable, wrapper);
   setToggle(wrapper);
-  setToast(wrapper);
   setUpdate(wrapper);
 };
 

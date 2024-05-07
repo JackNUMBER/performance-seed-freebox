@@ -26,18 +26,6 @@
   background: #824dd9;
 }
 
-.seed-performance__toast {
-  position: absolute;
-  top: 7px;
-  left: 6px;
-  color: white;
-  opacity: 0;
-}
-
-.seed-performance__toast.toasted {
-  animation: 1s toasted forwards, 1s 6s hideToast forwards;
-}
-
 .seed-performance__table-container {
   max-height: 0;
   overflow: hidden;
