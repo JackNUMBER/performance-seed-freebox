@@ -39,9 +39,6 @@ const round = (number, decimals) => {
 };
 
 const prepareDataForTable = (data) => {
-  // keep only seeding downloads
-  data = data.filter((dl) => dl.status === 'seeding');
-
   let array = [];
 
   data.forEach((elm) => {
@@ -50,6 +47,7 @@ const prepareDataForTable = (data) => {
     const ratio = elm.tx_bytes / elm.rx_bytes;
     array.push({
       id: elm.queue_pos,
+      status: elm.status,
       name: elm.name,
       duration: `${days} j`,
       ratio: round(ratio, 2),
@@ -73,6 +71,27 @@ const buildCell = (cellKey, cellData, rowData, isHeading, tableData) => {
 
   if (cellKey === 'name') {
     cell.setAttribute('title', cellData);
+  }
+
+  if (cellKey === 'status') {
+    cell.style.backgroundSize = '16px';
+    cell.title = cellData;
+
+    switch (cellData) {
+      case 'seeding':
+        cell.classList.add('btn-24-download-seeding');
+        cell.style.filter = 'invert(1)';
+        break;
+      case 'done':
+        cell.classList.add('btn-24-download-done');
+        cell.style.opacity = 0.2;
+        break;
+
+      default:
+        break;
+    }
+
+    return cell;
   }
 
   if (cellKey === 'bytesByDay') {
@@ -108,12 +127,10 @@ const buildRow = (rowData, isHeading, tableData) => {
   return row;
 };
 
-const buildTable = (tableData) => {
+const buildTable = (heading, tableData) => {
   let table = document.createElement('table');
-
   table.classList.add('seed-performance__table');
 
-  const heading = ['#', 'nom', 'durée', 'ratio', 'ratio/j', 'Mo/j', 'priorité'];
   const thead = buildRow(heading, true, tableData);
   table.appendChild(thead);
 
@@ -127,6 +144,17 @@ const buildTable = (tableData) => {
 };
 
 const addTable = (data, targetNode) => {
+  const heading = [
+    '#',
+    '',
+    'nom',
+    'durée',
+    'ratio',
+    'ratio/j',
+    'Mo/j',
+    'priorité',
+  ];
+
   data = prepareDataForTable(data);
   let tableContainer;
   const tableContainerId = 'tableContainer';
@@ -144,7 +172,7 @@ const addTable = (data, targetNode) => {
     tableContainer.classList.add('seed-performance__table-container');
   }
 
-  tableContainer.appendChild(buildTable(data));
+  tableContainer.appendChild(buildTable(heading, data));
   targetNode.appendChild(tableContainer);
 };
 
@@ -162,6 +190,7 @@ const getData = (callback, targetNode) => {
     const OK = 200; // status 200 is a successful return.
     if (xhr.readyState === DONE) {
       if (xhr.status === OK) {
+        // console.log('result', JSON.parse(xhr.responseText));
         callback(JSON.parse(xhr.responseText).result, targetNode);
       } else {
         console.error('Error with API: ' + xhr.status);
