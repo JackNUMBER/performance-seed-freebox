@@ -43,16 +43,22 @@ const prepareDataForTable = (data) => {
 
   data.forEach((elm) => {
     const days = dayCount(elm.created_ts);
-    const daysCompute = days > 0 ? days : 1;
+    const daysNotZero = days > 0 ? days : 1;
     const ratio = elm.tx_bytes / elm.rx_bytes;
+
+    const ratioByDay = ratio / daysNotZero;
+    const bytesByDay = elm.tx_bytes / daysNotZero / 1000000;
+
+    console.log('ratioByDay', ratioByDay);
+    console.log('bytesByDay', bytesByDay);
     array.push({
       id: elm.queue_pos,
       status: elm.status,
       name: elm.name,
       duration: `${days} j`,
       ratio: round(ratio, 2),
-      ratioByDay: round(ratio / days, 2),
-      bytesByDay: round(elm.tx_bytes / daysCompute / 1000000, 1),
+      ratioByDay: round(ratioByDay, 2),
+      bytesByDay: round(bytesByDay, 1),
       priority: elm.io_priority,
     });
   });
