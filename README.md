@@ -1,12 +1,13 @@
-# Performance Seed Freebox [![Chrome version][badge-cws]][link-cws] [![Firefox version][badge-amo]][link-amo]
-
 [badge-cws]: https://img.shields.io/chrome-web-store/v/edlkgcidmeflfpjmeakkhhehbocokaie.svg?label=chrome
 [badge-amo]: https://img.shields.io/amo/v/performance-seed-freebox.svg?label=firefox
-[link-cws]: https://chrome.google.com/webstore/detail/npmhub/edlkgcidmeflfpjmeakkhhehbocokaie 'Aller sur la page Chrome Web Store'
+[link-cws]: https://chromewebstore.google.com/detail/performance-seed-freebox/edlkgcidmeflfpjmeakkhhehbocokaie 'Aller sur la page Chrome Web Store'
 [link-amo]: https://addons.mozilla.org/fr/firefox/addon/performance-seed-freebox/ 'Aller sur la page Firefox add-ons'
+https://img.shields.io/chrome-web-store/v/:edlkgcidmeflfpjmeakkhhehbocokaie
+
+# Performance Seed Freebox [![Chrome version][badge-cws]][link-cws] [![Firefox version][badge-amo]][link-amo]
 
 <p align="center">
-  <a href="https://chrome.google.com/webstore/detail/npmhub/edlkgcidmeflfpjmeakkhhehbocokaie" title="Go to Chrome Web Store">
+  <a href="https://chromewebstore.google.com/detail/performance-seed-freebox/edlkgcidmeflfpjmeakkhhehbocokaie" title="Go to Chrome Web Store">
     <img src="images/badge_chrome.png" align="center" alt="Chrome">
   </a>
   &nbsp;
