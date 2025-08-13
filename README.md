@@ -2,7 +2,6 @@
 [badge-amo]: https://img.shields.io/amo/v/performance-seed-freebox.svg?label=firefox
 [link-cws]: https://chromewebstore.google.com/detail/performance-seed-freebox/edlkgcidmeflfpjmeakkhhehbocokaie 'Aller sur la page Chrome Web Store'
 [link-amo]: https://addons.mozilla.org/fr/firefox/addon/performance-seed-freebox/ 'Aller sur la page Firefox add-ons'
-https://img.shields.io/chrome-web-store/v/:edlkgcidmeflfpjmeakkhhehbocokaie
 
 # Performance Seed Freebox [![Chrome version][badge-cws]][link-cws] [![Firefox version][badge-amo]][link-amo]
 
